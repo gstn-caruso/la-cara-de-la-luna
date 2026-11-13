@@ -1,0 +1,8 @@
+{
+  "title": "La cara de la luna",
+  "slug": "la-cara-de-la-luna",
+  "initial_version": "0.1.0",
+  "godot_version": "4.7.2",
+  "export_preset": "Linux",
+  "tests": ["tests/character_store_test.gd", "tests/frontend_test.gd", "tests/smoke.gd", "tests/save_migration_test.gd"]
+}

@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/mannequin.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="2_camera"]
+[ext_resource type="Script" path="res://scripts/study.gd" id="3_study"]
+[ext_resource type="Shader" path="res://shaders/study_floor.gdshader" id="4_floor"]
+
+[sub_resource type="Environment" id="Environment_studio"]
+background_mode = 1
+background_color = Color(0.85, 0.84, 0.81, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.88, 0.9, 1, 1)
+ambient_light_energy = 0.4
+reflected_light_source = 2
+tonemap_mode = 0
+
+[sub_resource type="ShaderMaterial" id="Material_floor"]
+shader = ExtResource("4_floor")
+
+[sub_resource type="PlaneMesh" id="Mesh_floor"]
+material = SubResource("Material_floor")
+size = Vector2(200, 200)
+
+[sub_resource type="BoxShape3D" id="Shape_floor"]
+size = Vector3(200, 0.2, 200)
+
+[sub_resource type="Theme" id="Theme_overlay"]
+default_font_size = 16
+Label/colors/font_color = Color(0.19, 0.21, 0.21, 1)
+
+[sub_resource type="StyleBoxLine" id="Line_divider"]
+color = Color(0.24, 0.25, 0.24, 0.22)
+thickness = 1
+
+[node name="MotionStudy" type="Node3D"]
+script = ExtResource("3_study")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_studio")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -32, 0)
+light_color = Color(1, 0.97, 0.9, 1)
+light_energy = 0.8
+shadow_enabled = true
+shadow_opacity = 0.5
+directional_shadow_max_distance = 40.0
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-30, 135, 0)
+light_color = Color(0.82, 0.88, 1, 1)
+light_energy = 0.15
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("Mesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("Shape_floor")
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_player")]
+camera = NodePath("../Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+current = true
+fov = 35.0
+script = ExtResource("2_camera")
+target = NodePath("../Player")
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Layout" type="MarginContainer" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_overlay")
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 30
+
+[node name="Content" type="VBoxContainer" parent="Overlay/Layout"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="Overlay/Layout/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="Brand" type="Label" parent="Overlay/Layout/Content/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "APP_NAME"
+
+[node name="Description" type="Label" parent="Overlay/Layout/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.36, 0.38, 0.37, 1)
+theme_override_font_sizes/font_size = 12
+text = "WORLD_EYEBROW"
+
+[node name="Number" type="Label" parent="Overlay/Layout/Content/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "WORLD_NUMBER"
+
+[node name="Divider" type="HSeparator" parent="Overlay/Layout/Content"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("Line_divider")
+
+[node name="Title" type="Label" parent="Overlay/Layout/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "WORLD_TITLE"
+
+[node name="Subtitle" type="Label" parent="Overlay/Layout/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.36, 0.38, 0.37, 1)
+theme_override_font_sizes/font_size = 15
+text = "WORLD_SUBTITLE"
+
+[node name="Space" type="Control" parent="Overlay/Layout/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BottomDivider" type="HSeparator" parent="Overlay/Layout/Content"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("Line_divider")
+
+[node name="Footer" type="HBoxContainer" parent="Overlay/Layout/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="Controls" type="Label" parent="Overlay/Layout/Content/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "WORLD_CONTROLS"
+
+[node name="State" type="Label" parent="Overlay/Layout/Content/Footer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "WORLD_IDLE"
