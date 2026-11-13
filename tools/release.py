@@ -61,7 +61,7 @@ def main():
     build.mkdir(exist_ok=True)
     lines = [f"# {config['title']} v{version}", "", "## Changes", ""]
     lines.extend(f"- {message.splitlines()[0]}" for message in reversed(messages) if change_type(message))
-    lines += ["", "## Download", "", "Linux x86_64: extract the ZIP and run the executable. No Godot installation is needed.", "", "This early PvE prototype includes character creation and selection, local saves, English/Spanish, and a movement sandbox. Combat and progression are not implemented yet.", ""]
+    lines += ["", "## Download", "", "Linux x86_64: extract the ZIP and run the executable. No Godot installation is needed.", "", config.get("summary", "See the changes above for the features included in this release."), ""]
     (build / "release-notes.md").write_text("\n".join(lines))
     print(f"Release version: {version or 'none (no releasable changes)'}")
     if args.github_output:
