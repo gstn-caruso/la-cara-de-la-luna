@@ -1,0 +1,67 @@
+keys,en,es
+APP_NAME,La cara de la luna,La cara de la luna
+FRONTEND_EYEBROW,A WORLD WAITING TO BE EXPLORED,UN MUNDO POR EXPLORAR
+LANGUAGE,Language,Idioma
+LANGUAGE_ENGLISH,English,English
+LANGUAGE_SPANISH,Español,Español
+TITLE_KICKER,YOUR NEXT ADVENTURE,TU PRÓXIMA AVENTURA
+TITLE_DESCRIPTION,Every story begins with a character. Make yours.,Cada historia comienza con un personaje. Creá el tuyo.
+TITLE_WELCOME,The journey begins,El viaje comienza
+TITLE_SUBTITLE,Gather by the fire. Your adventure awaits.,Acercate al fuego. Tu aventura te espera.
+PLAY,Play,Jugar
+QUIT,Quit,Salir
+BACK,Back,Volver
+CANCEL,Cancel,Cancelar
+OK,OK,Aceptar
+RETRY,Retry,Reintentar
+CAMP_NAME,THE FIRST CAMP,EL PRIMER CAMPAMENTO
+NAVIGATION_HINT,Tab / arrows to navigate  ·  Enter to choose  ·  Esc to go back,Tab / flechas para navegar  ·  Enter para elegir  ·  Esc para volver
+ROSTER_KICKER,CHOOSE YOUR ADVENTURER,ELEGÍ A TU AVENTURERO
+ROSTER_TITLE,Your characters,Tus personajes
+ROSTER_COUNT,%d / %d character slots,%d / %d espacios de personaje
+ROSTER_EMPTY_TITLE,A new beginning,Un nuevo comienzo
+ROSTER_EMPTY_DESCRIPTION,Who will answer the call? Create your first character to begin.,¿Quién responderá al llamado? Creá tu primer personaje para comenzar.
+ROSTER_EMPTY_LIST,Your camp is quiet. There are no characters here yet.,Tu campamento está tranquilo. Todavía no hay personajes.
+ENTER_WORLD,Enter World,Entrar al mundo
+CREATE_CHARACTER,Create Character,Crear personaje
+DELETE,Delete,Eliminar
+CREATE_KICKER,FORGE YOUR OWN PATH,TRAZÁ TU PROPIO CAMINO
+CREATE_TITLE,Create a character,Creá un personaje
+CLASS_CHOOSE_TITLE,Choose your path,Elegí tu camino
+CLASS_CHOOSE_DESCRIPTION,Three callings. One adventure. Choose a class to meet your character.,Tres vocaciones. Una aventura. Elegí una clase para conocer a tu personaje.
+CHARACTER_NAME,CHARACTER NAME,NOMBRE DEL PERSONAJE
+NAME_PLACEHOLDER,What will you be called?,¿Cómo te vas a llamar?
+CHARACTER_CLASS,CHOOSE A CLASS,ELEGÍ UNA CLASE
+CREATE,Create,Crear
+CREATE_READY,Your character is ready to join the camp.,Tu personaje está listo para unirse al campamento.
+CLASS_WARRIOR,Warrior,Guerrero
+CLASS_ROGUE,Rogue,Pícaro
+CLASS_MAGE,Mage,Mago
+CLASS_WARRIOR_ROLE,MELEE · STRENGTH · RESILIENCE,CUERPO A CUERPO · FUERZA · RESISTENCIA
+CLASS_ROGUE_ROLE,MELEE · AGILITY · OPPORTUNITY,CUERPO A CUERPO · AGILIDAD · OPORTUNIDAD
+CLASS_MAGE_ROLE,RANGED · MAGIC · CONTROL,A DISTANCIA · MAGIA · CONTROL
+CLASS_WARRIOR_DESCRIPTION,Meet danger head-on. A steadfast fighter whose strength and resilience hold the line.,Enfrentá el peligro de cerca. Un combatiente firme cuya fuerza y resistencia sostienen la primera línea.
+CLASS_ROGUE_DESCRIPTION,"Find the opening. An agile adventurer who relies on precision, positioning, and a well-timed strike.","Encontrá la oportunidad. Un aventurero ágil que confía en la precisión, la posición y un golpe en el momento justo."
+CLASS_MAGE_DESCRIPTION,Shape the unseen. A wielder of arcane power who commands the battlefield from a distance.,Dale forma a lo invisible. Dominá el poder arcano para controlar el campo de batalla desde lejos.
+DELETE_TITLE,Delete character?,¿Eliminar personaje?
+DELETE_CONFIRM,Delete “%s”? This character will be permanently removed.,¿Eliminar a «%s»? Este personaje se eliminará de forma permanente.
+ERROR_TITLE,Something went wrong,Ocurrió un problema
+ERROR_LOAD,Your characters could not be loaded. Existing saves have been left untouched. Retry after restoring a valid save.,No se pudieron cargar tus personajes. Los archivos existentes se conservaron. Reintentá después de restaurar un archivo válido.
+ERROR_SAVE,Your changes could not be saved. Your previous characters are safe. Please try again.,No se pudieron guardar los cambios. Tus personajes anteriores están a salvo. Volvé a intentarlo.
+ERROR_NAME_LENGTH,Use a name between 2 and 20 characters.,Usá un nombre de entre 2 y 20 caracteres.
+ERROR_NAME_CONTROL,Names cannot contain control characters.,El nombre no puede contener caracteres de control.
+ERROR_NAME_DUPLICATE,You already have a character with that name.,Ya tenés un personaje con ese nombre.
+ERROR_CLASS_REQUIRED,Choose a class for your character.,Elegí una clase para tu personaje.
+ERROR_ROSTER_FULL,All eight character slots are occupied.,Los ocho espacios de personaje están ocupados.
+ERROR_CHARACTER_MISSING,That character is no longer available.,Ese personaje ya no está disponible.
+ERROR_ENTER_WORLD,The world could not be opened. Please try again.,No se pudo abrir el mundo. Volvé a intentarlo.
+ERROR_LANGUAGE_SAVE,Your language preference could not be saved. Please try again.,No se pudo guardar tu preferencia de idioma. Volvé a intentarlo.
+WORLD_EYEBROW,MOVEMENT STUDY,ESTUDIO DE MOVIMIENTO
+WORLD_NUMBER,01 / PVE PROTOTYPE,01 / PROTOTIPO PVE
+WORLD_TITLE,A first step.,Un primer paso.
+WORLD_SUBTITLE,"A character, a clearing, and a journey ahead.","Un personaje, un claro y un viaje por delante."
+WORLD_CONTROLS,W A S D / ARROWS   Move     ·     ESC   Characters,W A S D / FLECHAS   Mover     ·     ESC   Personajes
+WORLD_WALKING,WALKING / %.1f m/s,CAMINANDO / %.1f m/s
+WORLD_IDLE,IDLE / 0.0 m/s,EN REPOSO / 0.0 m/s
+WORLD_CHARACTER,%s · %s,%s · %s
+BUILD_VERSION,v%s,v%s

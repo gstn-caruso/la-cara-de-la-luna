@@ -1,0 +1,2 @@
+assets/** -whitespace
+*.csv text eol=lf
