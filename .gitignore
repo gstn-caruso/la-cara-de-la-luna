@@ -1,5 +1,21 @@
 .godot/
-assets/
+# Track only runtime GLBs and their import settings; textures are embedded.
+/assets/**
+!/assets/**/
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Knight.glb
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Knight.glb.import
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Rogue_Hooded.glb
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Rogue_Hooded.glb.import
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Mage.glb
+!/assets/KayKit_Adventurers_2.0_FREE/Characters/gltf/Mage.glb.import
+!/assets/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Minion.glb
+!/assets/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Minion.glb.import
+!/assets/Universal Animation Library\[Standard\]/Unreal-Godot/UAL1_Standard.glb
+!/assets/Universal Animation Library\[Standard\]/Unreal-Godot/UAL1_Standard.glb.import
+!/assets/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb
+!/assets/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb.import
+!/assets/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb
+!/assets/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb.import
 build/
 
 __pycache__/
