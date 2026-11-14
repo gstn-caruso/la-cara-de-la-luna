@@ -50,7 +50,7 @@ def main():
     shutil.copytree("licenses", folder / "licenses", dirs_exist_ok=True)
     for pack in Path("assets").glob("*/License.txt"):
         shutil.copy(pack, folder / "licenses" / (pack.parent.name + "_LICENSE.txt"))
-    (folder / "RUN.txt").write_text(f"{config['title']} v{args.version}\n\nRun ./{executable.name}\nWASD / arrows: move. Escape: return to characters.\nHold the middle mouse button and drag: orbit the camera.\nMouse wheel up/down: zoom in/out.\nSelect English or Español in the language menu.\n")
+    (folder / "RUN.txt").write_text(f"{config['title']} v{args.version}\n\nRun ./{executable.name}\nWASD / arrows: move. Escape: return to characters.\nApproach the skeleton to exchange automatic basic attacks.\nClick / Tab: optionally select a target.\nGreen health bar: player. Red health bar: enemy.\nHold the middle mouse button and drag: orbit the camera.\nMouse wheel up/down: zoom in/out.\nSelect English or Español in the language menu.\n")
     archive = Path("build") / (folder.name + ".zip")
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zipped:
         for file in sorted(folder.rglob("*")):
