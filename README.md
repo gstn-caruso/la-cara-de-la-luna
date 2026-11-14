@@ -23,6 +23,10 @@ The title, roster, and creation screens share the same 3D camp. Mouse, Tab,
 arrow keys, and Enter navigate the interface. The supported minimum window size
 is 960 × 600; the reference layout is 1280 × 800.
 
+In the world, hold the middle mouse button and drag to orbit the character
+horizontally and vertically. Scroll up to zoom in and down to zoom out. Movement
+stays relative to the camera, and releasing the middle button restores the cursor.
+
 ## Characters and saves
 
 - Eight local character slots, with the last selected character restored on launch.

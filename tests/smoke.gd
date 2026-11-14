@@ -84,9 +84,94 @@ func _run() -> void:
 	var desired_focus: Vector3 = player.global_position + Vector3.UP * camera.focus_height
 	_check(camera.global_position.distance_to(desired_focus + camera.offset) < 0.03, "The camera catches up after movement")
 	_check(player.velocity.length() < 0.01 and animations.current_animation == "Idle", "The scene settles in idle")
+	await _camera_controls(scene, player, camera)
 	if failures == 0:
-		print("PASS: keyboard, directions, diagonal speed, floor, facing, animation loops, skeleton and camera.")
+		print("PASS: movement, animations, camera follow, mouse orbit, zoom limits and cursor release.")
 	quit(0 if failures == 0 else 1)
+
+
+func _camera_controls(scene: Node3D, player: CharacterBody3D, camera: Camera3D) -> void:
+	var original_basis := camera.global_basis
+	var original_distance: float = camera.offset.length()
+	var original_mouse_mode := Input.mouse_mode
+	_mouse_motion(Vector2(100, 50))
+	await _frames(2)
+	_check(camera.global_basis.is_equal_approx(original_basis), "Mouse motion alone does not rotate the camera")
+
+	_mouse_button(MOUSE_BUTTON_WHEEL_UP, true)
+	await _frames(2)
+	_check(camera.offset.length() < original_distance, "Scrolling up brings the camera closer")
+	_mouse_button(MOUSE_BUTTON_WHEEL_DOWN, true)
+	await _frames(2)
+	_check(is_equal_approx(camera.offset.length(), original_distance), "Scrolling down reverses zoom")
+	for step in range(100):
+		_mouse_button(MOUSE_BUTTON_WHEEL_UP, true)
+	await _frames(2)
+	_check(is_equal_approx(camera.offset.length(), camera.min_distance), "Zoom stops before entering the character")
+	for step in range(100):
+		_mouse_button(MOUSE_BUTTON_WHEEL_DOWN, true)
+	await _frames(2)
+	_check(is_equal_approx(camera.offset.length(), camera.max_distance), "Zoom out has a finite limit")
+
+	var orbit_distance: float = camera.offset.length()
+	_mouse_button(MOUSE_BUTTON_MIDDLE, true)
+	_mouse_motion(Vector2(160, 50))
+	await _frames(3)
+	_check((-original_basis.z).dot(-camera.global_basis.z) < 0.95, "Middle drag changes the viewing direction")
+	_check(is_equal_approx(camera.offset.length(), orbit_distance), "Orbit preserves the chosen distance")
+	_check((-camera.global_basis.z).dot((camera.focus - camera.global_position).normalized()) > 0.999, "Orbit keeps the character in view")
+	_mouse_motion(Vector2(0, 50000))
+	await _frames(2)
+	_check(camera.global_basis.y.dot(Vector3.UP) > 0.0, "Vertical orbit cannot flip the camera")
+	_mouse_motion(Vector2(0, -50000))
+	await _frames(2)
+	_check(camera.global_position.y > camera.focus.y, "Vertical orbit stays above the character")
+	_mouse_button(MOUSE_BUTTON_MIDDLE, false)
+	original_basis = camera.global_basis
+	_mouse_motion(Vector2(120, 80))
+	await _frames(2)
+	_check(camera.global_basis.is_equal_approx(original_basis), "Releasing the middle button stops orbit")
+	_check(Input.mouse_mode == original_mouse_mode, "Releasing the middle button restores the cursor")
+
+	var forward := -camera.global_basis.z
+	forward.y = 0.0
+	_key(KEY_W, true)
+	await _frames(60)
+	_check(player.velocity.normalized().dot(forward.normalized()) > 0.99, "Movement follows the rotated camera")
+	_key(KEY_W, false)
+	await _frames(30)
+
+	_mouse_button(MOUSE_BUTTON_MIDDLE, true)
+	await _frames(1)
+	camera.notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
+	original_basis = camera.global_basis
+	_mouse_motion(Vector2(100, 50))
+	await _frames(2)
+	_check(camera.global_basis.is_equal_approx(original_basis), "Losing window focus cancels orbit")
+	_check(Input.mouse_mode == original_mouse_mode, "Losing focus releases the cursor")
+	_mouse_button(MOUSE_BUTTON_MIDDLE, false)
+	_mouse_button(MOUSE_BUTTON_MIDDLE, true)
+	await _frames(1)
+	scene.queue_free()
+	await _frames(2)
+	_check(Input.mouse_mode == original_mouse_mode, "Leaving the world releases the cursor")
+	_mouse_button(MOUSE_BUTTON_MIDDLE, false)
+
+
+func _mouse_button(button: MouseButton, pressed: bool) -> void:
+	var event := InputEventMouseButton.new()
+	event.button_index = button
+	event.pressed = pressed
+	event.position = Vector2(root.size) / 2.0
+	Input.parse_input_event(event)
+
+
+func _mouse_motion(relative: Vector2) -> void:
+	var event := InputEventMouseMotion.new()
+	event.relative = relative
+	event.screen_relative = relative
+	event.position = Vector2(root.size) / 2.0
+	Input.parse_input_event(event)
 
 
 func _frames(count: int) -> void:
