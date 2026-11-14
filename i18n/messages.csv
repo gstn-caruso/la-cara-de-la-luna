@@ -60,7 +60,7 @@ WORLD_EYEBROW,MOVEMENT STUDY,ESTUDIO DE MOVIMIENTO
 WORLD_NUMBER,01 / PVE PROTOTYPE,01 / PROTOTIPO PVE
 WORLD_TITLE,A first step.,Un primer paso.
 WORLD_SUBTITLE,"A character, a clearing, and a journey ahead.","Un personaje, un claro y un viaje por delante."
-WORLD_CONTROLS,W A S D / ARROWS   Move     ·     ESC   Characters,W A S D / FLECHAS   Mover     ·     ESC   Personajes
+WORLD_CONTROLS,WASD / ARROWS   Move · MIDDLE DRAG   Camera · WHEEL   Zoom · ESC   Characters,WASD / FLECHAS   Mover · ARRASTRAR RUEDA   Cámara · RUEDA   Zoom · ESC   Personajes
 WORLD_WALKING,WALKING / %.1f m/s,CAMINANDO / %.1f m/s
 WORLD_IDLE,IDLE / 0.0 m/s,EN REPOSO / 0.0 m/s
 WORLD_CHARACTER,%s · %s,%s · %s
