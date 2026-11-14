@@ -56,12 +56,27 @@ ERROR_ROSTER_FULL,All eight character slots are occupied.,Los ocho espacios de p
 ERROR_CHARACTER_MISSING,That character is no longer available.,Ese personaje ya no está disponible.
 ERROR_ENTER_WORLD,The world could not be opened. Please try again.,No se pudo abrir el mundo. Volvé a intentarlo.
 ERROR_LANGUAGE_SAVE,Your language preference could not be saved. Please try again.,No se pudo guardar tu preferencia de idioma. Volvé a intentarlo.
-WORLD_EYEBROW,MOVEMENT STUDY,ESTUDIO DE MOVIMIENTO
+WORLD_EYEBROW,BASIC COMBAT,COMBATE BÁSICO
 WORLD_NUMBER,01 / PVE PROTOTYPE,01 / PROTOTIPO PVE
 WORLD_TITLE,A first step.,Un primer paso.
 WORLD_SUBTITLE,"A character, a clearing, and a journey ahead.","Un personaje, un claro y un viaje por delante."
-WORLD_CONTROLS,WASD / ARROWS   Move · MIDDLE DRAG   Camera · WHEEL   Zoom · ESC   Characters,WASD / FLECHAS   Mover · ARRASTRAR RUEDA   Cámara · RUEDA   Zoom · ESC   Personajes
+WORLD_CONTROLS,"WASD / Arrows · Move    Approach · Basic attack    Click / Tab · Target
+Middle drag · Camera    Wheel · Zoom    Esc · Characters","WASD / Flechas · Mover    Acercate · Golpe básico    Clic / Tab · Objetivo
+Arrastrar rueda · Cámara    Rueda · Zoom    Esc · Personajes"
 WORLD_WALKING,WALKING / %.1f m/s,CAMINANDO / %.1f m/s
 WORLD_IDLE,IDLE / 0.0 m/s,EN REPOSO / 0.0 m/s
 WORLD_CHARACTER,%s · %s,%s · %s
 BUILD_VERSION,v%s,v%s
+ENEMY_SKELETON,Basic skeleton,Esqueleto básico
+COMBAT_HEALTH,Health  %d / %d,Vida  %d / %d
+COMBAT_TARGET,%s  ·  %d / %d,%s  ·  %d / %d
+COMBAT_NO_TARGET,No target selected,Sin objetivo seleccionado
+COMBAT_SELECT_HINT,Approach the skeleton to attack.,Acercate al esqueleto para atacar.
+COMBAT_ATTACKING,Basic attack · Automatic,Ataque básico · Automático
+COMBAT_OUT_OF_RANGE,Move closer to hit your target.,Acercate para golpear al objetivo.
+COMBAT_PAUSED,Approach to start your basic attack.,Acercate para iniciar el golpe básico.
+COMBAT_BASIC_HIT,Basic hit,Golpe básico
+COMBAT_WEAPON_SWORD,Equipped · Sword,Arma equipada · Espada
+COMBAT_WEAPON_DAGGER,Equipped · Dagger,Arma equipada · Daga
+COMBAT_WEAPON_STAFF,Equipped · Staff (melee),Arma equipada · Bastón (cuerpo a cuerpo)
+COMBAT_RESPAWNED,You fell. Restored at the starting point.,Caíste. Volviste al punto de inicio.

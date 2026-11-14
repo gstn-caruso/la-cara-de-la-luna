@@ -2,7 +2,7 @@
 
 A Godot 4 low poly PvE prototype with a fantasy camp, a local character roster,
 and an animated character preview. Create a **Warrior**, **Rogue**, or **Mage**,
-then enter the movement sandbox.
+then enter the basic combat sandbox.
 
 ![Character selection](docs/character-selection.png)
 
@@ -13,11 +13,17 @@ then enter the movement sandbox.
 3. Press **F5**. Choose **Play**, then **Create Character**.
 4. Enter a name, choose a class, and select **Create**.
 5. Choose **Enter World**. Move with **WASD / arrow keys**; press **Escape** to return to your roster.
+6. Approach the skeleton: both combatants attack automatically at melee range.
+   Clicking or pressing **Tab** can select a target, but is not required to fight.
 
 ```sh
 godot --editor --path .
 godot --path .
 ```
+
+If a local Godot executable is stored at `assets/godot/godot`, run
+`./assets/godot/godot --path .` to use it. The entire `assets/` directory is
+ignored by Git, including models, animations, and local engine binaries.
 
 The title, roster, and creation screens share the same 3D camp. Mouse, Tab,
 arrow keys, and Enter navigate the interface. The supported minimum window size
@@ -34,9 +40,29 @@ stays relative to the camera, and releasing the middle button restores the curso
   characters and case-insensitive duplicates are rejected.
 - Creation requires an explicit class choice. Cancel discards the draft.
 - Delete requires confirmation; deleting the selected character selects its next neighbor.
-- Classes have distinct KayKit models and share the pack's authored idle/walk animations.
-  Combat, statistics, specializations, equipment selection, and appearance customization
-  are deferred. All three currently share the same movement behavior.
+- Classes have distinct colors and starting weapons. Optional KayKit models and
+  animations replace the native geometry when installed locally. All three share
+  the same movement and combat rules with either visual provider.
+
+## Basic combat
+
+The Warrior starts with a sword, the Rogue with a faster dagger, and the Mage
+with a staff used for basic melee attacks. Movement remains manual; the basic
+attack starts automatically against a nearby target. Hits resolve during the
+weapon swing and require the target to remain in range. Each landed basic hit
+displays its name and damage above the recipient.
+
+The basic skeleton has 32 health: three sword hits or four dagger/staff hits.
+It detects the player within 2.5 meters and approaches to attack, but its attacks
+leave the player with at least one health.
+The player has a green health bar; the skeleton has a red bar above its head.
+Both combatants display damage feedback. Killing the skeleton stops the attack and plays its death
+animation; it respawns after six seconds. Leaving its combat area resets it.
+Player death restores full health at the world entry point and resets combat.
+Combat health is temporary and starts fresh when entering the world.
+
+Quests, reputation, experience, loot, specializations, equipment selection, and
+appearance customization are deferred.
 
 Characters are saved in `user://characters.json`, in Godot's application user-data
 directory (on Linux, usually `~/.local/share/godot/app_userdata/La cara de la luna/`). A temporary
@@ -68,12 +94,13 @@ are displayed verbatim and never translated.
 - `scripts/frontend.gd`: screen navigation, validation feedback, confirmations, and UI theme.
 - `scripts/camp.gd`: original native-geometry camp, lighting, and animated preview.
 - `scripts/character_store.gd`: versioned JSON storage and protected mutations.
-- `data/classes/`: class resources with stable IDs, localization keys, and model references.
-- `scripts/character_visual.gd`: shared KayKit skeleton and animation setup.
+- `data/classes/`: gameplay resources with stable IDs, localization keys, and attack statistics.
+- `scripts/character_visual.gd`: visual adapter with a common animation interface.
+- `scripts/visual_assets.gd`: optional model and animation paths, loaded only when available.
+- `scripts/primitive_visual.gd`: native geometry and animations for asset-free builds.
 - `scripts/localization.gd`: language selection and preference persistence.
-- `scenes/main.tscn`: walking sandbox; receives the selected character.
-- `scenes/mannequin.tscn`: original Quaternius movement mannequin, retained as the
-  standalone sandbox fallback when no character is selected.
+- `scenes/main.tscn`: combat sandbox; receives the selected character.
+- `scenes/mannequin.tscn`: player capsule and model container, with no imported resources.
 
 The character store is an autoload with `create_character`, `select_character`,
 `delete_character`, `selected_character`, and `load_characters` methods. Mutations
@@ -81,19 +108,27 @@ return success/failure; `error_key` supplies a localizable message on failure.
 Persisted character records contain `id`, `name`, and `class_id`. The file also
 contains a format version and selected character ID.
 
-## Assets
+## Optional art packs
+
+The game runs and exports from a clean checkout with no `assets/` directory.
+Character creation, movement, combat, health, attacks, and saves use native Godot
+code and text resources. Missing art uses animated native geometry; adding the
+following packs locally changes presentation without changing gameplay.
 
 - **KayKit: Adventurers Character Pack 2.0**, by Kay Lousberg, **CC0**. Uses Knight
   for Warrior, Rogue_Hooded for Rogue, and Mage for Mage. `Rig_Medium_General`
   supplies `Idle_A`; `Rig_Medium_MovementBasic` supplies `Walking_A`.
   These clips are copied into a common `Idle` / `Walk` animation library using
   their matching skeleton paths; no cross-rig retargeting is needed.
+- **KayKit: Skeletons Character Pack 1.1**, by Kay Lousberg, **CC0**. Uses
+  `characters/gltf/Skeleton_Minion.glb` for the basic enemy.
 - **Universal Animation Library — Standard**, by Quaternius, **CC0 1.0**. The
   original mannequin still uses its non-root-motion model and clips.
 - The camp is made from native Godot geometry and materials; no downloaded scenery is required.
 
-Both packs retain their original license files. `.gdignore` files exclude unused
-FBX directories from import while preserving source assets.
+Keep each pack under its named directory inside `assets/`. License copies live
+in `licenses/`. Source graphics are never committed. Set `LUNA_NO_ASSETS=1` to
+exercise the native visual provider even when local art packs are installed.
 
 ## Verification
 
@@ -106,7 +141,9 @@ godot --headless --path . --fixed-fps 60 --script res://tests/smoke.gd
 
 Tests cover validation, persistence/reload, save protection, capacity, selection,
 deletion, screen transitions, creation cancellation, both translation catalogs,
-language persistence, world entry/return, and animated movement. They use isolated
+language persistence, world entry/return, animated movement, and automatic melee
+combat. Run `LUNA_NO_ASSETS=1 GODOT=godot python3 tools/check.py` to verify all
+behavior with the native visual provider. They use isolated
 temporary save paths and do not modify the normal roster or language preference.
 
 ## Releases and development
