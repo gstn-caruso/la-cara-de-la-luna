@@ -22,8 +22,9 @@ godot --path .
 ```
 
 If a local Godot executable is stored at `assets/godot/godot`, run
-`./assets/godot/godot --path .` to use it. The entire `assets/` directory is
-ignored by Git, including models, animations, and local engine binaries.
+`./assets/godot/godot --path .` to use it. Git tracks only the runtime GLB models
+and animation libraries used by the game, plus their import settings. Local engine
+binaries, full art packs, unused formats, extracted textures, and caches remain ignored.
 
 The title, roster, and creation screens share the same 3D camp. Mouse, Tab,
 arrow keys, and Enter navigate the interface. The supported minimum window size
@@ -110,10 +111,11 @@ contains a format version and selected character ID.
 
 ## Optional art packs
 
-The game runs and exports from a clean checkout with no `assets/` directory.
-Character creation, movement, combat, health, attacks, and saves use native Godot
-code and text resources. Missing art uses animated native geometry; adding the
-following packs locally changes presentation without changing gameplay.
+A clean checkout includes the seven runtime GLBs used by the game. Their
+textures are embedded, and license copies live in `licenses/`. Character creation,
+movement, combat, health, attacks, and saves use native Godot code and text
+resources. The game also runs and exports without the `assets/` directory, using
+animated native geometry when graphics are absent.
 
 - **KayKit: Adventurers Character Pack 2.0**, by Kay Lousberg, **CC0**. Uses Knight
   for Warrior, Rogue_Hooded for Rogue, and Mage for Mage. `Rig_Medium_General`
@@ -126,9 +128,12 @@ following packs locally changes presentation without changing gameplay.
   original mannequin still uses its non-root-motion model and clips.
 - The camp is made from native Godot geometry and materials; no downloaded scenery is required.
 
-Keep each pack under its named directory inside `assets/`. License copies live
-in `licenses/`. Source graphics are never committed. Set `LUNA_NO_ASSETS=1` to
-exercise the native visual provider even when local art packs are installed.
+Runtime models stay under their original pack directories inside `assets/`. The
+repository includes only the files referenced by `scripts/visual_assets.gd` and
+their `.import` settings. Godot generates extracted texture files during import;
+they remain ignored because the source images are already embedded in the GLBs.
+Set `LUNA_NO_ASSETS=1` to exercise the native visual provider even when the
+bundled graphics are present.
 
 ## Verification
 
